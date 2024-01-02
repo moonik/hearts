@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Heart Animation</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      background-color: #f7f7f7; /* Set background color */
+    }
+
+    #main-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: 'Pacifico', cursive; /* Set romantic font-family */
+      font-size: 24px;
+      color: #333; /* Set text color */
+    }
+
+    .falling-heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      animation: fall 5s linear infinite;
+    }
+
+    .falling-heart svg {
+      width: 100%;
+      height: 100%;
+      fill: pink;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(100vh);
+      }
+    }
+  </style>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap">
+</head>
+<body>
+  <div id="main-text">
+    Kocham Cię, moje słodkie słoneczko
+  </div>
+
+  <!-- JavaScript for dynamically creating falling hearts -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      // Create falling hearts dynamically
+      setInterval(() => {
+        const fallingHeart = document.createElement("div");
+        fallingHeart.className = "falling-heart";
+        fallingHeart.innerHTML = `
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="pink">
+            <path d="M12 21.35l-1.45-1.32C5.4 14.36 2 11.28 2 7.5 2 4.42 4.42 2 7.5 2c1.74 0 3.41.81 4.5 2.09C15.09 2.81 16.76 2 18.5 2 21.58 2 24 4.42 24 7.5c0 3.78-3.4 6.86-8.55 12.54L12 21.35z"/>
+          </svg>
+        `;
+        fallingHeart.style.left = Math.random() * window.innerWidth + "px";
+        document.body.appendChild(fallingHeart);
+
+        // Remove falling hearts after animation
+        fallingHeart.addEventListener("animationend", () => {
+          fallingHeart.remove();
+        });
+      }, 1000);
+    });
+  </script>
+</body>
+</html>
